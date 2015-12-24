@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Health Measurements and Evaluation Report</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Health Measurements and Evaluation Report">
+  <meta name="author" content="Jitendra Patel">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Health Measurements and Evaluation Report</h1>
+    <h2>Developing Data Products Project</h2>
+    <p>Jitendra Patel<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h4>Health Measurements Blood Pressure, BMI and A1C</h4>
+  </hgroup>
+  <article data-timings="">
+    <p>The Blood pressure is measured using two numbers. Blood pressure is measured in millimeters of mercury (mmHg). The chart below shows normal, at-risk, and high blood pressure levels:</p>
+
+<pre><code>+ Blood Pressure [ &lt; 120  / &lt; 80 ]       : Normal
++ Blood Pressure [120-139 / 80-89]       : At Risk (prehypertension)
++ Blood Pressure [140 &gt;= / 90 &gt;= ]       : High
+</code></pre>
+
+<p><strong>What is BMI?</strong>
+The Body Mass Index (BMI) is a measure of body fat based on height and weight, the World Health Organization (WHO) proposes the following classification:</p>
+
+<pre><code>+ BMI &lt;18.5     : Underweight + BMI [18.5-24.9] : Normal weight
++ BMI [25-29.9] : Overweight  + BMI &gt;=30        : Obesity
+</code></pre>
+
+<p><strong>What is A1C?</strong>
+The A1C test is a blood test also called blood sugar, over the past 3 months. The A1C test is sometimes called the hemoglobin A1c, HbA1c, or glycohemoglobin test. According to A1C levels: Diagnosis       A1C Level </p>
+
+<pre><code>* Normal        below 5.7%     * PreDiabetes   5.7 to 6.4% 
+* Diabetes      6.5% or above
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h4>It is calculated Based on functions and Formulas.</h4>
+  </hgroup>
+  <article data-timings="">
+    <p>The Blood pressure compare with high and low limit and evaluate the pressure condition.
+The function use for calculating the diagnostic is the following:</p>
+
+<pre><code class="r">diagnostic_f&lt;-function(systolic, diastolic){
+        sysVal &lt;- systolic 
+        diasVal &lt;- diastolic
+        diagvalue &lt;- &quot;Normal&quot;
+       ifelse( ( sysVal &lt;= 120 &amp;  diasVal &lt;= 80),diagvalue &lt;- &quot;Normal&quot;, 
+       ifelse( ( (sysVal &gt; 120 &amp; sysVal &lt;= 139)  &amp; ( diasVal &gt; 80 &amp; diasVal &lt;=89) ), diagvalue &lt;- &quot;At Risk prehypertension&quot;,
+       ifelse( ( sysVal &gt;= 140 &amp; diasVal &gt;= 90), diagvalue &lt;- &quot;High&quot;,diagvalue &lt;- &quot;Abnormal&quot; ) ) )
+}
+</code></pre>
+
+<p>For our example (systolic = 126 mmHg and diastolic =  83 mmHg) the diagnostic would be:</p>
+
+<pre><code class="r">    diagnostic_f(126,83)
+</code></pre>
+
+<pre><code>## [1] &quot;At Risk prehypertension&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <article data-timings="">
+    <p>There is a formula for calculating the BMI measure. The formula is the following:
+BMI = weight(kg) / height(metres)\(^2\)
+Thus for the next example, the BMI will be:</p>
+
+<h3>Diagnostic</h3>
+
+<p>The function use for calculating the diagnostic is the following:</p>
+
+<pre><code class="r">diagnostic_fn&lt;-function(weight,height){
+        BMI_value&lt;-weight/(height^2)
+        ifelse(BMI_value&lt;18.5,&quot;UnderWeight&quot;,ifelse(BMI_value&lt;25,&quot;Normal Weight&quot;,ifelse(BMI_value&lt;30,&quot;OverWeight&quot;,&quot;Obesity&quot;)))
+}
+</code></pre>
+
+<p>For our example (weight=76 kg and height=1.70 m) the diagnostic would be:</p>
+
+<pre><code class="r">diagnostic_fn(76,1.7)
+</code></pre>
+
+<pre><code>## [1] &quot;OverWeight&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <article data-timings="">
+    <p>There is a formula for calculating the A1C level. The formula is the following:
+A1C = (46.7 + estimated Average Glucose (eAG)) / 28.7
+Thus for the next example, the A1C Value will be:</p>
+
+<h3>Diagnostic</h3>
+
+<p>The function use for calculating the diagnostic is the following:</p>
+
+<pre><code class="r">diag_fn&lt;- function(eAG) {
+          A1CVal &lt;- (46.7 +eAG) / 28.7
+          ifelse(A1CVal &lt; 5.7,&quot;Normal - No Diabetes&quot;,
+                    ifelse( ( A1CVal &gt;= 5.7 &amp; A1CVal &lt; 6.4) ,&quot;Prediabetes&quot;, 
+                    ifelse( A1CVal &gt;= 6.5, &quot;Diabetes&quot; ) ))
+}
+</code></pre>
+
+<p>For our example (eAG=120 mg/dL) the diagnostic would be:</p>
+
+<pre><code class="r">diag_fn(120)
+</code></pre>
+
+<pre><code>## [1] &quot;Prediabetes&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Conclusion</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The Blood pressure, BMI, and A1C values are key measurements of your overall health evalution report. There would be many factors to these values like ethnicity, Origin, fitness, work habits, stress level, diets and exercises..
+Contorlling BMI shall helps in lowering A1C and Blood pressure with proper exercise and diets habits.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Health Measurements Blood Pressure, BMI and A1C'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='It is calculated Based on functions and Formulas.'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='NA'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='NA'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Conclusion'>
+         5
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
