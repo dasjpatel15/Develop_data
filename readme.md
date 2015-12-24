@@ -1,5 +1,5 @@
-Developing-Data-Products-Project
-================================
+Developing Data Products: Project
+===================================
 The repository for Developing Data Products Project assignment project:
 The shiny application developed is a Preliminary Health Measurments and produce the Evaluation report.
 It is very simple to use, just enter following values:
