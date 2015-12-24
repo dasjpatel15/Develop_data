@@ -17,3 +17,6 @@ The application is accesible in: https://dsjpatel2015.shinyapps.io/project
 
 The presentation is designed using slidify and it could be visulized in:
 
+http://rpubs.com/jpatel2015/Develop_Data_Project (or) 
+http://dasjpatel15.github.io/Develop_data/index.html#/
+
